@@ -1,23 +1,23 @@
 package com.example.fx;
 
 public class CaesarCipher {
-    final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,«»\"':!? ";
+    final String alphabetEn = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,«»\"':!? ";
 
-    protected char encryptChar(char character, int key) {
-        int index = ALPHABET.indexOf(character);
+    char encryptChar(char character, int key) {
+        int index = alphabetEn.indexOf(character);
         if (index != -1) {
-            int newIndex = (index + key) % ALPHABET.length();
-            return ALPHABET.charAt(newIndex);
+            int newIndex = (index + key) % alphabetEn.length();
+            return alphabetEn.charAt(newIndex);
         } else {
             return character;
         }
     }
 
-    protected char decryptChar(char character, int key) {
-        int index = ALPHABET.indexOf(character);
+   char decryptChar(char character, int key) {
+        int index = alphabetEn.indexOf(character);
         if (index != -1) {
-            int newIndex = (index - key + ALPHABET.length()) % ALPHABET.length();
-            return ALPHABET.charAt(newIndex);
+            int newIndex = (index - key + alphabetEn.length()) % alphabetEn.length();
+            return alphabetEn.charAt(newIndex);
         } else {
             return character;
         }

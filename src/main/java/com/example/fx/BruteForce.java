@@ -5,7 +5,7 @@ import java.io.*;
 public class BruteForce {
     void bruteForce(String filePath) throws IOException {
         CaesarCipher caesarCipher = new CaesarCipher();
-        String alphabet = caesarCipher.ALPHABET;
+        String alphabet = caesarCipher.alphabetEn;
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
 
@@ -73,6 +73,6 @@ public class BruteForce {
                 eCount++;
             }
         }
-        return (double) eCount / text.length();
+        return eCount * 1.0 / text.length();
     }
 }

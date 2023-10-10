@@ -5,14 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileService {
-    protected void encryptFile(String filePath, int key) throws IOException {
-        FileInputStream inputStream = null;
-        FileOutputStream outputStream = null;
+    void encryptFile(String filePath, int key) throws IOException {
 
-        try {
-            inputStream = new FileInputStream(filePath);
-            outputStream = new FileOutputStream(filePath + "[ENCRYPTED]");
-
+        try (FileInputStream inputStream = new FileInputStream(filePath);
+             FileOutputStream outputStream = new FileOutputStream(filePath + "[ENCRYPTED]");
+        ) {
             int bytesRead;
             while ((bytesRead = inputStream.read()) != -1) {
                 char originalChar = (char) bytesRead;
@@ -20,24 +17,16 @@ public class FileService {
                 char encryptedChar = caesarCipher.encryptChar(originalChar, key);
                 outputStream.write((int) encryptedChar);
             }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    protected void decryptFile(String filePath, int key) throws IOException {
-        FileInputStream inputStream = null;
-        FileOutputStream outputStream = null;
+    void decryptFile(String filePath, int key) throws IOException {
 
-        try {
-            inputStream = new FileInputStream(filePath);
-            outputStream = new FileOutputStream(filePath + "[DECRYPTED]");
-
+        try (FileInputStream inputStream = new FileInputStream(filePath);
+             FileOutputStream outputStream = new FileOutputStream(filePath + "[DECRYPTED]");
+        ) {
             int bytesRead;
             while ((bytesRead = inputStream.read()) != -1) {
                 char encryptedChar = (char) bytesRead;
@@ -45,13 +34,8 @@ public class FileService {
                 char decryptedChar = caesarCipher.decryptChar(encryptedChar, key);
                 outputStream.write((int) decryptedChar);
             }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
